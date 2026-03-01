@@ -2,9 +2,9 @@ from enum import Enum
 import logging
 
 class Pet_Type(Enum):
-    Bear,
-    Deer,
-    Hourse
+    Bear = "bear"
+    Deer = "dear"
+    Hourse = "hourse"
 
 def history(func):
     def wrapper(*args, **kwargs):
@@ -58,6 +58,7 @@ class Pet():
             self.energy = 100
         else:
             self.energy += 20
+        print("yummy, now I'm not hungry anymore!")
     
     @history
     def sleep(self) -> str:
@@ -66,6 +67,11 @@ class Pet():
             self.hunger = 0
         else:
             self.hunger -= 20
+        if (self.happiness - 20) < 0:
+            self.happiness = 0
+        else:
+            self.happiness -= 20
+        print("ZZZ...\n I slept well! now I'm not tired anymore!")
     
     @history
     def play(self) -> str:
@@ -74,4 +80,15 @@ class Pet():
             self.energy = 0
         else:
             self.energy -= 20
+        if (self.hunger - 20) < 0:
+            self.hunger = 0
+        else:
+            self.hunger -= 20
+        print("🏈🏀\nwow, that was fun, now I'm super happy!")
+        
 
+def operation_interface(p: Pet):
+    command = str(input("what would you like to do with {p.name} the {p.type.value} ? (eat/ play/ sleep)"))
+    if command == "eat":
+        p.eat()
+        p.points_update()
