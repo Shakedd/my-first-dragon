@@ -25,7 +25,8 @@ class Pet():
         self.energy = energy
         self.points = (hunger + happiness + energy)/3
         self.history = history
-        
+
+    
     def points_update(self) -> None:
         self.points = (self.hunger + self.happiness + self.energy)/3
 
@@ -88,7 +89,16 @@ class Pet():
         
 
 def operation_interface(p: Pet):
-    command = str(input("what would you like to do with {p.name} the {p.type.value} ? (eat/ play/ sleep)"))
-    if command == "eat":
-        p.eat()
+    functions = {
+        "is hungry": p.is_hungry(),
+        "is happy": p.is_happy(),
+        "is tired": p.is_tired,
+        "eat": p.eat(),
+        "sleep": p.sleep(),
+        "play": p.play(),
+        "history": p.get_history()
+        }
+    while True:
+        command = str(input("what would you like to do with {p.name} the {p.type.value} ? (eat/ play/ sleep)"))
+        functions[command]
         p.points_update()
