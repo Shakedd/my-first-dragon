@@ -1,5 +1,5 @@
 from enum import Enum
-import logging
+import typer
 
 class Pet_Type(Enum):
     Bear = "bear"
@@ -17,7 +17,7 @@ def history(func):
 class Pet():
     DEFAULT_PATH = "history.txt"
     
-    def __init__(name: str, type: Pet_Type, hunger: int = 50, happiness: int = 50, energy: int = 50, history: str = DEFAULT_PATH):
+    def __init__(self, name: str, type: Pet_Type, hunger: int = 50, happiness: int = 50, energy: int = 50, history: str = DEFAULT_PATH):
         self.name = name
         self.type = type
         self.hunger = hunger
@@ -102,3 +102,10 @@ def operation_interface(p: Pet):
         command = str(input("what would you like to do with {p.name} the {p.type.value} ? (eat/ play/ sleep)"))
         functions[command]
         p.points_update()
+
+def main(name: str, type: Pet_Type):
+    p = Pet(name, type)
+    operation_interface(p)
+
+if __name__=="__main__":
+    typer.run(main)
