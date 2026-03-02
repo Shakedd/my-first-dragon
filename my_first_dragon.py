@@ -43,7 +43,7 @@ class Pet:
         self.points = (self.hunger + self.happiness + self.energy) / 3
 
     def menu(self) -> None:
-        print("options: eat, play, sleep, is hungry, is happy, is tired, history")
+        print("options: eat, play, sleep, is hungry, is happy, is tired, history, exit")
 
     def is_hungry(self) -> bool:
         return True if self.hunger > self.HALF else False
@@ -103,7 +103,7 @@ def operation_interface(p: Pet):
         "sleep": p.sleep,
         "play": p.play,
         "history": p.get_history,
-        "menu": p.menu,
+        "menu": p.menu
     }
 
     while True:
@@ -122,6 +122,9 @@ what would you like to do with {p.name} the {p.type.value} ?
             elif r is False:
                 print("no!")
             p.points_update()
+        elif command == "exit":
+            print("Bye!")
+            break
         else:
             print("please enter a valid option.\nHint: type 'menu'")
 

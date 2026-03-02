@@ -19,3 +19,7 @@ sleep
 play
 play
 eat
+eat
+eat
+play
+sleep
