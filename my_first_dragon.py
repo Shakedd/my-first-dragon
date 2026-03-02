@@ -66,6 +66,7 @@ class Pet:
         else:
             self.energy += self.FIFTH
         print("yummy, now I'm not hungry anymore!")
+        self.points_update()
 
     @history
     def sleep(self) -> None:
@@ -79,6 +80,7 @@ class Pet:
         else:
             self.happiness -= self.FIFTH
         print("ZZZ...\n I slept well! now I'm not tired anymore!")
+        self.points_update()
 
     @history
     def play(self) -> None:
@@ -92,6 +94,7 @@ class Pet:
         else:
             self.hunger += self.HALF
         print("🏈🏀\nwow, that was fun, now I'm super happy!")
+        self.points_update()
 
 
 def operation_interface(p: Pet):
@@ -121,7 +124,6 @@ what would you like to do with {p.name} the {p.type.value} ?
                 print("yes!!")
             elif r is False:
                 print("no!")
-            p.points_update()
         elif command == "exit":
             print("Bye!")
             break
