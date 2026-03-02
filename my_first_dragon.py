@@ -64,10 +64,10 @@ class Pet():
     @history
     def sleep(self) -> None:
         self.energy = 100
-        if (self.hunger - 20) < 0:
+        if (self.hunger + 20) < 0:
             self.hunger = 0
         else:
-            self.hunger -= 20
+            self.hunger += 20
         if (self.happiness - 20) < 0:
             self.happiness = 0
         else:
@@ -77,14 +77,14 @@ class Pet():
     @history
     def play(self) -> None:
         self.happiness = 100
-        if (self.energy -20) < 0:
+        if (self.energy -50) < 0:
             self.energy = 0
         else:
-            self.energy -= 20
-        if (self.hunger - 20) < 0:
+            self.energy -= 50
+        if (self.hunger + 50) < 0:
             self.hunger = 0
         else:
-            self.hunger -= 20
+            self.hunger += 50
         print("🏈🏀\nwow, that was fun, now I'm super happy!")
         
 

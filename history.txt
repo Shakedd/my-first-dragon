@@ -6,3 +6,6 @@ play
 play
 play
 sleep
+play
+eat
+sleep
