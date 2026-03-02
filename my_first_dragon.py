@@ -1,10 +1,11 @@
 from enum import Enum
 import typer
+import flask
 
 DEFAULT_PATH = "history.txt"
 
 
-class Pet_Type(Enum):
+class PetType(Enum):
     Bear = "bear"
     Deer = "deer"
     Hourse = "horse"
@@ -29,7 +30,7 @@ class Pet:
     def __init__(
         self,
         name: str,
-        type: Pet_Type,
+        type: PetType,
         hunger: int = HALF,
         happiness: int = HALF,
         energy: int = HALF,
@@ -133,7 +134,7 @@ what would you like to do with {p.name} the {p.type.value} ?
             print("please enter a valid option.\nHint: type 'menu'")
 
 
-def main(name: str, type: Pet_Type):
+def main(name: str, type: PetType):
     p = Pet(name, type)
     operation_interface(p)
 
