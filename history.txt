@@ -9,3 +9,10 @@ sleep
 play
 eat
 sleep
+play
+play
+eat
+eat
+play
+eat
+sleep

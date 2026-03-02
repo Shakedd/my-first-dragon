@@ -1,34 +1,45 @@
 from enum import Enum
 import typer
 
+DEFAULT_PATH = "history.txt"
+
 class Pet_Type(Enum):
     Bear = "bear"
-    Deer = "dear"
-    Hourse = "hourse"
+    Deer = "deer"
+    Hourse = "horse"
+
 
 def history(func):
     def wrapper(*args, **kwargs):
-        with open("history.txt", "a") as f:
-            f.write(func.__name__+ '\n')
-        func(*args, **kwargs)
+        with open(DEFAULT_PATH, "a") as f:
+            f.write(func.__name__ + "\n")
+        return func(*args, **kwargs)
     return wrapper
 
 
-class Pet():
-    DEFAULT_PATH = "history.txt"
+class Pet:
+    global DEFAULT_PATH
 
-    def __init__(self, name: str, type: Pet_Type, hunger: int = 50, happiness: int = 50, energy: int = 50, history: str = DEFAULT_PATH):
+    def __init__(
+        self,
+        name: str,
+        type: Pet_Type,
+        hunger: int = 50,
+        happiness: int = 50,
+        energy: int = 50,
+    ):
         self.name = name
         self.type = type
         self.hunger = hunger
         self.happiness = happiness
         self.energy = energy
-        self.points = (hunger + happiness + energy)/3
-        self.history = history
-
+        self.points = (hunger + happiness + energy) / 3
 
     def points_update(self) -> None:
-        self.points = (self.hunger + self.happiness + self.energy)/3
+        self.points = (self.hunger + self.happiness + self.energy) / 3
+
+    def menu(self) -> None:
+        print("options: eat, play, sleep, is hungry, is happy, is tired, history")
 
     def is_hungry(self) -> bool:
         if self.hunger > 50:
@@ -49,7 +60,7 @@ class Pet():
             return False
 
     def get_history(self) -> None:
-        with open("history.txt", "r") as f:
+        with open(DEFAULT_PATH, "r") as f:
             print(f.read())
 
     @history
@@ -77,7 +88,7 @@ class Pet():
     @history
     def play(self) -> None:
         self.happiness = 100
-        if (self.energy -50) < 0:
+        if (self.energy - 50) < 0:
             self.energy = 0
         else:
             self.energy -= 50
@@ -96,20 +107,30 @@ def operation_interface(p: Pet):
         "eat": p.eat,
         "sleep": p.sleep,
         "play": p.play,
-        "history": p.get_history
-        }
+        "history": p.get_history,
+        "menu": p.menu,
+    }
     while True:
-        command = str(input(f"what would you like to do with {p.name} the {p.type.value} ?\n (eat/ play/ sleep/ is hungry/ is happy/ is tired/ history)"))
+        command = str(
+            input(
+                f"""
+what would you like to do with {p.name} the {p.type.value} ?
+(enter 'menu' to view options)
+                """
+            )
+        )
         r = functions[command]()
-        if r == True:
+        if r is True:
             print("yes!!")
-        elif r == False:
+        elif r is False:
             print("no!")
         p.points_update()
+
 
 def main(name: str, type: Pet_Type):
     p = Pet(name, type)
     operation_interface(p)
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     typer.run(main)
