@@ -3,6 +3,7 @@ import typer
 
 DEFAULT_PATH = "history.txt"
 
+
 class Pet_Type(Enum):
     Bear = "bear"
     Deer = "deer"
@@ -14,6 +15,7 @@ def history(func):
         with open(DEFAULT_PATH, "a") as f:
             f.write(func.__name__ + "\n")
         return func(*args, **kwargs)
+
     return wrapper
 
 
@@ -106,7 +108,7 @@ def operation_interface(p: Pet):
         "sleep": p.sleep,
         "play": p.play,
         "history": p.get_history,
-        "menu": p.menu
+        "menu": p.menu,
     }
 
     while True:
