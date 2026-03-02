@@ -48,12 +48,12 @@ class Pet():
         else:
             return False
         
-    def get_history(self) -> str:
+    def get_history(self) -> None:
         with open("history.txt", "r") as f:
-            return f.read()
+            print(f.read())
     
     @history
-    def eat(self) -> str:
+    def eat(self) -> None:
         self.hunger = 0
         if (self.energy + 20) > 100:
             self.energy = 100
@@ -62,7 +62,7 @@ class Pet():
         print("yummy, now I'm not hungry anymore!")
     
     @history
-    def sleep(self) -> str:
+    def sleep(self) -> None:
         self.energy = 100
         if (self.hunger - 20) < 0:
             self.hunger = 0
@@ -75,7 +75,7 @@ class Pet():
         print("ZZZ...\n I slept well! now I'm not tired anymore!")
     
     @history
-    def play(self) -> str:
+    def play(self) -> None:
         self.happiness = 100
         if (self.energy -20) < 0:
             self.energy = 0
@@ -90,17 +90,21 @@ class Pet():
 
 def operation_interface(p: Pet):
     functions = {
-        "is hungry": p.is_hungry(),
-        "is happy": p.is_happy(),
+        "is hungry": p.is_hungry,
+        "is happy": p.is_happy,
         "is tired": p.is_tired,
         "eat": p.eat,
         "sleep": p.sleep,
         "play": p.play,
-        "history": p.get_history()
+        "history": p.get_history
         }
     while True:
         command = str(input(f"what would you like to do with {p.name} the {p.type.value} ?\n (eat/ play/ sleep/ is hungry/ is happy/ is tired/ history)"))
-        functions[command]()
+        r = functions[command]()
+        if r == True:
+            print("yes!!")
+        elif r == False:
+            print("no!")
         p.points_update()
 
 def main(name: str, type: Pet_Type):
