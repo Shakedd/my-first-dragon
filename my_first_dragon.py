@@ -19,14 +19,18 @@ def history(func):
 
 class Pet:
     global DEFAULT_PATH
+    FULL = 100
+    EMPTY = 0
+    HALF = 50
+    FIFTH = 20
 
     def __init__(
         self,
         name: str,
         type: Pet_Type,
-        hunger: int = 50,
-        happiness: int = 50,
-        energy: int = 50,
+        hunger: int = HALF,
+        happiness: int = HALF,
+        energy: int = HALF,
     ):
         self.name = name
         self.type = type
@@ -42,13 +46,13 @@ class Pet:
         print("options: eat, play, sleep, is hungry, is happy, is tired, history")
 
     def is_hungry(self) -> bool:
-        return True if self.hunger > 50 else False
+        return True if self.hunger > self.HALF else False
 
     def is_happy(self) -> bool:
-        return True if self.happiness > 50 else False
+        return True if self.happiness > self.HALF else False
 
     def is_tired(self) -> bool:
-        return True if self.energy < 50 else False
+        return True if self.energy < self.HALF else False
 
     def get_history(self) -> None:
         with open(DEFAULT_PATH, "r") as f:
@@ -56,37 +60,37 @@ class Pet:
 
     @history
     def eat(self) -> None:
-        self.hunger = 0
-        if (self.energy + 20) > 100:
-            self.energy = 100
+        self.hunger = self.EMPTY
+        if (self.energy + self.FIFTH) > self.FULL:
+            self.energy = self.FULL
         else:
-            self.energy += 20
+            self.energy += self.FIFTH
         print("yummy, now I'm not hungry anymore!")
 
     @history
     def sleep(self) -> None:
-        self.energy = 100
-        if (self.hunger + 20) < 0:
-            self.hunger = 0
+        self.energy = self.FULL
+        if (self.hunger + self.FIFTH) > self.FULL:
+            self.hunger = self.FULL
         else:
-            self.hunger += 20
-        if (self.happiness - 20) < 0:
-            self.happiness = 0
+            self.hunger += self.FIFTH
+        if (self.happiness - self.FIFTH) < self.EMPTY:
+            self.happiness = self.EMPTY
         else:
-            self.happiness -= 20
+            self.happiness -= self.FIFTH
         print("ZZZ...\n I slept well! now I'm not tired anymore!")
 
     @history
     def play(self) -> None:
-        self.happiness = 100
-        if (self.energy - 50) < 0:
-            self.energy = 0
+        self.happiness = self.FULL
+        if (self.energy - self.HALF) < self.EMPTY:
+            self.energy = self.EMPTY
         else:
-            self.energy -= 50
-        if (self.hunger + 50) < 0:
-            self.hunger = 0
+            self.energy -= self.HALF
+        if (self.hunger + self.HALF) > self.FULL:
+            self.hunger = self.FULL
         else:
-            self.hunger += 50
+            self.hunger += self.HALF
         print("🏈🏀\nwow, that was fun, now I'm super happy!")
 
 
