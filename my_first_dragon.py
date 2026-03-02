@@ -1,6 +1,6 @@
 from enum import Enum
 import typer
-import flask
+# import flask
 
 DEFAULT_PATH = "history.txt"
 
@@ -8,7 +8,7 @@ DEFAULT_PATH = "history.txt"
 class PetType(Enum):
     Bear = "bear"
     Deer = "deer"
-    Hourse = "horse"
+    Horse = "horse"
 
 
 def history(func):
@@ -21,7 +21,6 @@ def history(func):
 
 
 class Pet:
-    global DEFAULT_PATH
     FULL = 100
     EMPTY = 0
     HALF = 50
@@ -49,13 +48,13 @@ class Pet:
         print("options: eat, play, sleep, is hungry, is happy, is tired, history, exit")
 
     def is_hungry(self) -> bool:
-        return True if self.hunger > self.HALF else False
+        return self.hunger > self.HALF
 
     def is_happy(self) -> bool:
-        return True if self.happiness > self.HALF else False
+        return self.happiness > self.HALF
 
     def is_tired(self) -> bool:
-        return True if self.energy < self.HALF else False
+        return self.energy < self.HALF
 
     def get_history(self) -> None:
         with open(DEFAULT_PATH, "r") as f:
@@ -135,8 +134,11 @@ what would you like to do with {p.name} the {p.type.value} ?
 
 
 def main(name: str, type: PetType):
-    p = Pet(name, type)
-    operation_interface(p)
+    try:
+        p = Pet(name, type)
+        operation_interface(p)
+    except TypeError:
+        print("no such animal! the available animals are: bear, deer, horse")
 
 
 if __name__ == "__main__":
