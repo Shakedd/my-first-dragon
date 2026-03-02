@@ -105,6 +105,7 @@ def operation_interface(p: Pet):
         "history": p.get_history,
         "menu": p.menu,
     }
+
     while True:
         command = str(
             input(
@@ -114,12 +115,15 @@ what would you like to do with {p.name} the {p.type.value} ?
                 """
             )
         )
-        r = functions[command]()
-        if r is True:
-            print("yes!!")
-        elif r is False:
-            print("no!")
-        p.points_update()
+        if command in functions.keys():
+            r = functions[command]()
+            if r is True:
+                print("yes!!")
+            elif r is False:
+                print("no!")
+            p.points_update()
+        else:
+            print("please enter a valid option.\nHint: type 'menu'")
 
 
 def main(name: str, type: Pet_Type):
