@@ -8,8 +8,8 @@ class Pet_Type(Enum):
 
 def history(func):
     def wrapper(*args, **kwargs):
-        history = logging.basicConfig("history.txt")
-        history.info('{func.__name__}\n')
+        with open("history.txt", "a") as f:
+            f.write(func.__name__+ '\n')
         func(*args, **kwargs)
     return wrapper
         
@@ -49,7 +49,7 @@ class Pet():
             return False
         
     def get_history(self) -> str:
-        with open("history.txt", "a") as f:
+        with open("history.txt", "r") as f:
             return f.read()
     
     @history
@@ -93,14 +93,14 @@ def operation_interface(p: Pet):
         "is hungry": p.is_hungry(),
         "is happy": p.is_happy(),
         "is tired": p.is_tired,
-        "eat": p.eat(),
-        "sleep": p.sleep(),
-        "play": p.play(),
+        "eat": p.eat,
+        "sleep": p.sleep,
+        "play": p.play,
         "history": p.get_history()
         }
     while True:
-        command = str(input("what would you like to do with {p.name} the {p.type.value} ? (eat/ play/ sleep)"))
-        functions[command]
+        command = str(input(f"what would you like to do with {p.name} the {p.type.value} ?\n (eat/ play/ sleep/ is hungry/ is happy/ is tired/ history)"))
+        functions[command]()
         p.points_update()
 
 def main(name: str, type: Pet_Type):
