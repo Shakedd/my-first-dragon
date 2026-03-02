@@ -16,3 +16,6 @@ eat
 play
 eat
 sleep
+play
+play
+eat

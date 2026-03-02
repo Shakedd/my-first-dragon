@@ -42,22 +42,13 @@ class Pet:
         print("options: eat, play, sleep, is hungry, is happy, is tired, history")
 
     def is_hungry(self) -> bool:
-        if self.hunger > 50:
-            return True
-        else:
-            return False
+        return True if self.hunger > 50 else False
 
     def is_happy(self) -> bool:
-        if self.happiness > 50:
-            return True
-        else:
-            return False
+        return True if self.happiness > 50 else False
 
     def is_tired(self) -> bool:
-        if self.energy < 50:
-            return True
-        else:
-            return False
+        return True if self.energy < 50 else False
 
     def get_history(self) -> None:
         with open(DEFAULT_PATH, "r") as f:
