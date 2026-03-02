@@ -12,11 +12,11 @@ def history(func):
             f.write(func.__name__+ '\n')
         func(*args, **kwargs)
     return wrapper
-        
+
 
 class Pet():
     DEFAULT_PATH = "history.txt"
-    
+
     def __init__(self, name: str, type: Pet_Type, hunger: int = 50, happiness: int = 50, energy: int = 50, history: str = DEFAULT_PATH):
         self.name = name
         self.type = type
@@ -26,7 +26,7 @@ class Pet():
         self.points = (hunger + happiness + energy)/3
         self.history = history
 
-    
+
     def points_update(self) -> None:
         self.points = (self.hunger + self.happiness + self.energy)/3
 
@@ -41,17 +41,17 @@ class Pet():
             return True
         else:
             return False
-        
+
     def is_tired(self) -> bool:
         if self.energy < 50:
             return True
         else:
             return False
-        
+
     def get_history(self) -> None:
         with open("history.txt", "r") as f:
             print(f.read())
-    
+
     @history
     def eat(self) -> None:
         self.hunger = 0
@@ -60,7 +60,7 @@ class Pet():
         else:
             self.energy += 20
         print("yummy, now I'm not hungry anymore!")
-    
+
     @history
     def sleep(self) -> None:
         self.energy = 100
@@ -73,7 +73,7 @@ class Pet():
         else:
             self.happiness -= 20
         print("ZZZ...\n I slept well! now I'm not tired anymore!")
-    
+
     @history
     def play(self) -> None:
         self.happiness = 100
@@ -86,7 +86,7 @@ class Pet():
         else:
             self.hunger += 50
         print("🏈🏀\nwow, that was fun, now I'm super happy!")
-        
+
 
 def operation_interface(p: Pet):
     functions = {
