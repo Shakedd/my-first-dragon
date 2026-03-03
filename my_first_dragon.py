@@ -59,6 +59,18 @@ class Pet:
     def get_history(self) -> None:
         for i in HISTORY_JSON["history"]:
             print(i)
+    
+    def update(self, param, amount, operator):
+        if operator is "+":
+            if(param + amount) > self.FULL:
+                param = self.FULL
+            else:
+                param += amount
+        if operator is "-":
+            if(param - amount) < self.EMPTY:
+                param = self.EMPTY
+            else:
+                param -= amount
 
     @history
     def eat(self) -> None:
