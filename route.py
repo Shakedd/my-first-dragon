@@ -32,6 +32,23 @@ def points(name: str, animal: str):
     p = Pet(name, animal)
     return "your pet's calculated score is: " + str(p.points)
 
+@app.route('/<string:animal>/<string:name>/eat')
+def eat(name: str, animal: str):
+    p = Pet(name, animal)
+    p.eat()
+    return name + " ate!"
+
+@app.route('/<string:animal>/<string:name>/play')
+def eat(name: str, animal: str):
+    p = Pet(name, animal)
+    p.play()
+    return  name + " had fun!"
+
+@app.route('/<string:animal>/<string:name>/sleep')
+def eat(name: str, animal: str):
+    p = Pet(name, animal)
+    p.sleep()
+    return  name + " slept well!"
 
 if __name__=='__main__':
     app.run()
