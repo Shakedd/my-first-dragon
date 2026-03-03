@@ -1,8 +1,9 @@
 from enum import Enum
 import typer
+import json
 # import flask
 
-DEFAULT_PATH = "history.txt"
+HISTORY_JSON = {"history": []}
 
 
 class PetType(Enum):
@@ -13,8 +14,7 @@ class PetType(Enum):
 
 def history(func):
     def wrapper(*args, **kwargs):
-        with open(DEFAULT_PATH, "a") as f:
-            f.write(func.__name__ + "\n")
+        HISTORY_JSON["history"].append(func.__name__)
         return func(*args, **kwargs)
 
     return wrapper
@@ -57,8 +57,8 @@ class Pet:
         return self.energy < self.HALF
 
     def get_history(self) -> None:
-        with open(DEFAULT_PATH, "r") as f:
-            print(f.read())
+        for i in HISTORY_JSON["history"]:
+            print(i)
 
     @history
     def eat(self) -> None:
