@@ -71,42 +71,28 @@ class Pet:
                 param = self.EMPTY
             else:
                 param -= amount
+        return param
 
     @history
     def eat(self) -> None:
         self.hunger = self.EMPTY
-        if (self.energy + self.FIFTH) > self.FULL:
-            self.energy = self.FULL
-        else:
-            self.energy += self.FIFTH
+        self.energy = self.update(self.energy, self.FIFTH, "+")
         print("yummy, now I'm not hungry anymore!")
         self.points_update()
 
     @history
     def sleep(self) -> None:
         self.energy = self.FULL
-        if (self.hunger + self.FIFTH) > self.FULL:
-            self.hunger = self.FULL
-        else:
-            self.hunger += self.FIFTH
-        if (self.happiness - self.FIFTH) < self.EMPTY:
-            self.happiness = self.EMPTY
-        else:
-            self.happiness -= self.FIFTH
+        self.hunger = self.update(self.hunger, self.FIFTH, "+")
+        self.happiness = self.update(self.happiness, self.FIFTH, "-")
         print("ZZZ...\n I slept well! now I'm not tired anymore!")
         self.points_update()
 
     @history
     def play(self) -> None:
         self.happiness = self.FULL
-        if (self.energy - self.HALF) < self.EMPTY:
-            self.energy = self.EMPTY
-        else:
-            self.energy -= self.HALF
-        if (self.hunger + self.HALF) > self.FULL:
-            self.hunger = self.FULL
-        else:
-            self.hunger += self.HALF
+        self.energy = self.update(self.energy, self.HALF, "-")
+        self.hunger = self.update(self.hunger, self.HALF, "+")
         print("🏈🏀\nwow, that was fun, now I'm super happy!")
         self.points_update()
 
