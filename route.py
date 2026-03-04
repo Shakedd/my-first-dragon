@@ -1,13 +1,13 @@
 from my_first_dragon import Pet
-from flask import Flask
+from flask import Flask, request, render_template 
 
 app = Flask("my_dragon")
 
-@app.route('/')
-def home_page():
-    return "welcome to the home page!"
+# @app.route('/')
+# def home_page():
+#     return "welcome to the home page! please use the following form url to access your pet"
 
-@app.route('/<string:animal>/<string:name>')
+@app.route('/<string:animal>/<string:name>/points')
 def status(name: str, animal: str):
     p = Pet(name, animal)
     return "your pet's calculated score is: " + str(p.points)
@@ -39,16 +39,23 @@ def eat(name: str, animal: str):
     return name + " ate!"
 
 @app.route('/<string:animal>/<string:name>/play')
-def eat(name: str, animal: str):
+def play(name: str, animal: str):
     p = Pet(name, animal)
     p.play()
     return  name + " had fun!"
 
 @app.route('/<string:animal>/<string:name>/sleep')
-def eat(name: str, animal: str):
+def sleep(name: str, animal: str):
     p = Pet(name, animal)
     p.sleep()
     return  name + " slept well!"
+
+@app.route('/', methods=['GET'])
+def index():
+    if request.form.get('eat') == 'EAT':
+        print("eat is working")
+    return render_template('buttons.html')
+    
 
 if __name__=='__main__':
     app.run()
