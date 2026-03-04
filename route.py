@@ -57,6 +57,12 @@ def index(animal, name):
         if request.form.get('eat') == 'EAT':
             p.eat()
             return name + " ate!"
+        if request.form.get('sleep') == 'SLEEP':
+            p.sleep()
+            return name + " slept!"
+        if request.form.get('play') == 'PLAY':
+            p.play()
+            return name + " played!"
     return render_template('buttons.html', name=name, animal=animal)
     
 
