@@ -42,7 +42,7 @@ class Pet:
         self.points = (hunger + happiness + energy) / 3
 
     def points_update(self) -> None:
-        self.points = (self.hunger + self.happiness + self.energy) / 3
+        self.points = (abs(self.hunger-100) + self.happiness + self.energy) / 3
 
     def menu(self) -> None:
         print("options: eat, play, sleep, is hungry, is happy, is tired, history, exit")
