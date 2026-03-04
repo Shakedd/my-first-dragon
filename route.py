@@ -42,7 +42,7 @@ def index(animal, name):
             p.sleep()
         if request.form.get('play') == 'PLAY':
             p.play()
-    return render_template('buttons.html', hunger = str(p.hunger), energy = str(p.energy), happiness = str(p.happiness))
+    return render_template('buttons.html', hunger = str(p.hunger), energy = str(p.energy), happiness = str(p.happiness), points = str(p.points))
     
 
 if __name__=='__main__':
