@@ -1,4 +1,4 @@
-from my_first_dragon import Pet
+from my_first_dragon import Pet, PetType
 from flask import Flask, request, render_template 
 
 app = Flask("my_dragon")
