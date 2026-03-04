@@ -63,7 +63,7 @@ def index(animal, name):
         if request.form.get('play') == 'PLAY':
             p.play()
             return name + " played!"
-    return render_template('buttons.html', name=name, animal=animal)
+    return render_template('buttons.html', pet_name=name, animal=animal)
     
 
 if __name__=='__main__':
