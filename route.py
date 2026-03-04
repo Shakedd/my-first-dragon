@@ -32,24 +32,6 @@ def points(name: str, animal: str):
     p = Pet(name, animal)
     return "your pet's calculated score is: " + str(p.points)
 
-@app.route('/<string:animal>/<string:name>/eat')
-def eat(name: str, animal: str):
-    p = Pet(name, animal)
-    p.eat()
-    return name + " ate!"
-
-@app.route('/<string:animal>/<string:name>/play')
-def play(name: str, animal: str):
-    p = Pet(name, animal)
-    p.play()
-    return  name + " had fun!"
-
-@app.route('/<string:animal>/<string:name>/sleep')
-def sleep(name: str, animal: str):
-    p = Pet(name, animal)
-    p.sleep()
-    return  name + " slept well!"
-
 @app.route('/<string:animal>/<string:name>', methods=['GET', 'POST'])
 def index(animal, name):
     p = Pet(name, animal)
