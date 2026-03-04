@@ -5,7 +5,11 @@ app = Flask("my_dragon")
 
 @app.route('/')
 def home_page():
-    return "welcome to the home page! please use the following form url to access your pet"
+    return """
+welcome to the home page! 
+please use the following form url to access your pet:
+/your_pet_type/your_pet_name
+"""
 
 @app.route('/<string:animal>/<string:name>', methods=['GET', 'POST'])
 def index(animal, name):
