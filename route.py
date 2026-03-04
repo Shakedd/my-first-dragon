@@ -3,9 +3,9 @@ from flask import Flask, request, render_template
 
 app = Flask("my_dragon")
 
-# @app.route('/')
-# def home_page():
-#     return "welcome to the home page! please use the following form url to access your pet"
+@app.route('/')
+def home_page():
+    return "welcome to the home page! please use the following form url to access your pet"
 
 @app.route('/<string:animal>/<string:name>/points')
 def status(name: str, animal: str):
@@ -50,11 +50,14 @@ def sleep(name: str, animal: str):
     p.sleep()
     return  name + " slept well!"
 
-@app.route('/', methods=['GET'])
-def index():
-    if request.form.get('eat') == 'EAT':
-        print("eat is working")
-    return render_template('buttons.html')
+@app.route('/<string:animal>/<string:name>', methods=['GET', 'POST'])
+def index(animal, name):
+    p = Pet(name, animal)
+    if request.method == 'POST':
+        if request.form.get('eat') == 'EAT':
+            p.eat()
+            return name + " ate!"
+    return render_template('buttons.html', name=name, animal=animal)
     
 
 if __name__=='__main__':
