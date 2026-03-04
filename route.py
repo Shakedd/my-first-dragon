@@ -45,7 +45,9 @@ def index(animal, name):
         if request.form.get('play') == 'PLAY':
             p.play()
             return name + " played!"
-    return render_template('buttons.html')
+        # if request.form.get('hunger') == 'HUNGER':
+        #     return name + "'s hunger: " + str(p.hunger)
+    return render_template('buttons.html', hunger = str(p.hunger), energy = str(p.energy), happiness = str(p.happiness))
     
 
 if __name__=='__main__':
