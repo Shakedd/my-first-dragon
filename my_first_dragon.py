@@ -2,7 +2,6 @@ from enum import Enum
 import typer
 import numpy
 
-
 class PetType(Enum):
     Bear = "bear"
     Deer = "deer"

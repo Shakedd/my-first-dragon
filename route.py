@@ -1,5 +1,5 @@
 from my_first_dragon import Pet, PetType
-from flask import Flask, request, render_template 
+from flask import Flask, request, render_template, session
 
 app = Flask("my_dragon")
 
