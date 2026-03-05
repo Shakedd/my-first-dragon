@@ -1,9 +1,6 @@
 from enum import Enum
 import typer
-import json
-# import flask
 
-HISTORY_JSON = {"history": []}
 
 
 class PetType(Enum):
@@ -12,19 +9,12 @@ class PetType(Enum):
     Horse = "horse"
 
 
-def history(func):
-    def wrapper(*args, **kwargs):
-        HISTORY_JSON["history"].append(func.__name__)
-        return func(*args, **kwargs)
-
-    return wrapper
-
-
 class Pet:
     FULL = 100
     EMPTY = 0
     HALF = 50
     FIFTH = 20
+    HISTORY_JSON = {"history": []}
 
     def __init__(
         self,
@@ -33,14 +23,22 @@ class Pet:
         hunger: int = HALF,
         happiness: int = HALF,
         energy: int = HALF,
+        history: dict = HISTORY_JSON
     ):
         self.name = name
         self.type = type
         self.hunger = hunger
         self.happiness = happiness
         self.energy = energy
+        self.history = history
         self.points = (hunger + happiness + energy) / 3
 
+    def history_log(func):
+        def wrapper(self, *args, **kwargs):
+            self.history["history"].append(func.__name__)
+            return func(self, *args, **kwargs)
+        return wrapper
+    
     def points_update(self) -> None:
         self.points = (abs(self.hunger-100) + self.happiness + self.energy) / 3
 
@@ -57,7 +55,7 @@ class Pet:
         return self.energy < self.HALF
 
     def get_history(self) -> None:
-        for i in HISTORY_JSON["history"]:
+        for i in self.history["history"]:
             print(i)
     
     def update(self, param, amount, operator):
@@ -73,14 +71,14 @@ class Pet:
                 param -= amount
         return param
 
-    @history
+    @history_log
     def eat(self) -> None:
         self.hunger = self.EMPTY
         self.energy = self.update(self.energy, self.FIFTH, "+")
         print("yummy, now I'm not hungry anymore!")
         self.points_update()
 
-    @history
+    @history_log
     def sleep(self) -> None:
         self.energy = self.FULL
         self.hunger = self.update(self.hunger, self.FIFTH, "+")
@@ -88,7 +86,7 @@ class Pet:
         print("ZZZ...\n I slept well! now I'm not tired anymore!")
         self.points_update()
 
-    @history
+    @history_log
     def play(self) -> None:
         self.happiness = self.FULL
         self.energy = self.update(self.energy, self.HALF, "-")
