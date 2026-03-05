@@ -1,6 +1,6 @@
 from enum import Enum
 import typer
-
+import numpy
 
 
 class PetType(Enum):
@@ -27,9 +27,9 @@ class Pet:
     ):
         self.name = name
         self.type = type
-        self.hunger = hunger
-        self.happiness = happiness
-        self.energy = energy
+        self.hunger = numpy.clip(hunger, 0, 100)
+        self.happiness = numpy.clip(happiness, 0, 100)
+        self.energy = numpy.clip(energy, 0, 100)
         self.history = history
         self.points = int((abs(self.hunger-100) + happiness + energy) / 3)
 
