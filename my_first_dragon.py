@@ -43,7 +43,13 @@ class Pet:
         self.points = (abs(self.hunger-100) + self.happiness + self.energy) / 3
 
     def menu(self) -> None:
-        print("options: eat, play, sleep, is hungry, is happy, is tired, history, exit")
+        print("""
+              options:
+              eat, play, sleep - treat your pet by using these.
+              is hungry, is happy, is tired - check your pet's status by using these
+              history - watch the treatment history of your pet
+              exit - exit the game
+              """)
 
     def is_hungry(self) -> bool:
         return self.hunger > self.HALF
