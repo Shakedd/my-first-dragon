@@ -59,12 +59,12 @@ class Pet:
             print(i)
     
     def update(self, param, amount, operator):
-        if operator is "+":
+        if operator == "+":
             if(param + amount) > self.FULL:
                 param = self.FULL
             else:
                 param += amount
-        if operator is "-":
+        if operator == "-":
             if(param - amount) < self.EMPTY:
                 param = self.EMPTY
             else:
@@ -73,7 +73,7 @@ class Pet:
 
     @history_log
     def eat(self) -> None:
-        self.hunger = self.EMPTY
+        self.hunger = self.update(self.hunger, self.HALF, "-")
         self.energy = self.update(self.energy, self.FIFTH, "+")
         print("yummy, now I'm not hungry anymore!")
         self.points_update()
