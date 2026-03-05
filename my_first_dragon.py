@@ -31,7 +31,7 @@ class Pet:
         self.happiness = happiness
         self.energy = energy
         self.history = history
-        self.points = (hunger + happiness + energy) / 3
+        self.points = int((abs(self.hunger-100) + happiness + energy) / 3)
 
     def history_log(func):
         def wrapper(self, *args, **kwargs):
