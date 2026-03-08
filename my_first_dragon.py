@@ -49,7 +49,7 @@ class Pet:
         print("""
               options:
               eat, play, sleep - treat your pet by using these.
-              is hungry, is happy, is tired - check your pet's status by using these
+              is hungry, is happy, is energetic - check your pet's status by using these
               history - watch the treatment history of your pet
               exit - exit the game
               """)
@@ -60,8 +60,8 @@ class Pet:
     def is_happy(self) -> bool:
         return self.happiness > self.HALF
 
-    def is_tired(self) -> bool:
-        return self.energy < self.HALF
+    def is_energetic(self) -> bool:
+        return self.energy > self.HALF
 
     def get_history(self) -> None:
         key = self.type.value + "_" + self.name
@@ -109,7 +109,7 @@ def operation_interface(p: Pet):
     functions = {
         "is hungry": p.is_hungry,
         "is happy": p.is_happy,
-        "is tired": p.is_tired,
+        "is energetic": p.is_energetic,
         "eat": p.eat,
         "sleep": p.sleep,
         "play": p.play,
