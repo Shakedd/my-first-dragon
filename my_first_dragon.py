@@ -30,7 +30,7 @@ class Pet:
         self.happiness = numpy.clip(happiness, 0, 100)
         self.energy = numpy.clip(energy, 0, 100)
         self.history = history
-        self.points = int((abs(self.hunger-100) + happiness + energy) / 3)
+        self.points = int((abs(self.hunger-100) + self.happiness + self.energy) / 3)
 
     def history_log(func):
         def wrapper(self, *args, **kwargs):
