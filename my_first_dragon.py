@@ -31,6 +31,7 @@ class Pet:
         self.history = history
         self.points = int((abs(self.hunger-100) + self.happiness + self.energy) / 3)
 
+    @staticmethod
     def history_log(func):
         def wrapper(self, *args, **kwargs):
             key = self.type.value + "_" + self.name
