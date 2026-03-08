@@ -70,9 +70,9 @@ class Pet:
     
     def update(self, param, amount, operator):
         if operator == "+":
-            max(0, min(100, param + amount))
+            max(self.EMPTY, min(self.FULL, param + amount))
         if operator == "-":
-            max(0, min(100, param - amount))
+            min(self.FULL, max(self.EMPTY, param - amount))
         return param
 
     @history_log
