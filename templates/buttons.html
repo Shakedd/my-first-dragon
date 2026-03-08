@@ -1,12 +1,17 @@
-<body style="background-color:pink">
-<title>Pet Game</title>
-<h1>Hello! you can treat your pet using the buttons below. your pet's status is:</h1>
-<h3>hunger: {{ hunger }}</h3>
-<h3>energy: {{ energy }}</h3>
-<h3>happiness: {{ happiness }}</h3>
-<h3>points: {{ points }}</h3>
-<form method="post">
-    <input type="submit" onclick="return alert('{{name}} the {{animal}} ate!')" value="EAT" name="eat"/>
-    <input type="submit" onclick="return alert('{{name}} the {{animal}} slept!')" value="SLEEP" name="sleep"/>
-    <input type="submit" onclick="return alert('{{name}} the {{animal}} played!')" value="PLAY" name="play"/>
-</form>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pet Game</title>
+        <link rel="stylesheet" herf="{{ url_for('static', filename='css/styles.css')}}">
+    </head>
+    <h1>Hello! you can treat your pet using the buttons below. your pet's status is:</h1>
+    <h3>hunger: {{ hunger }}</h3>
+    <h3>energy: {{ energy }}</h3>
+    <h3>happiness: {{ happiness }}</h3>
+    <h3>points: {{ points }}</h3>
+    <form method="post">
+        <input type="submit" onclick="return alert('{{name}} the {{animal}} ate!')" value="EAT" name="eat"/>
+        <input type="submit" onclick="return alert('{{name}} the {{animal}} slept!')" value="SLEEP" name="sleep"/>
+        <input type="submit" onclick="return alert('{{name}} the {{animal}} played!')" value="PLAY" name="play"/>
+    </form>
+</html>
