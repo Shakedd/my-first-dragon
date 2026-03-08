@@ -68,7 +68,7 @@ class Pet:
         for i in self.history[key]:
             print(i)
     
-    def update(self, param, amount, operator) -> int:
+    def update(self, param: int, amount: int, operator: str) -> int:
         if operator == "+":
             param = max(self.EMPTY, min(self.FULL, param + amount))
         if operator == "-":
