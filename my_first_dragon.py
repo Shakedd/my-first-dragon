@@ -43,7 +43,7 @@ class Pet:
         return wrapper
     
     def points_update(self) -> None:
-        self.points = (abs(self.hunger-100) + self.happiness + self.energy) / 3
+        self.points = int((abs(self.hunger-100) + self.happiness + self.energy) / 3)
 
     def menu(self) -> None:
         print("""
