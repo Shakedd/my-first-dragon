@@ -34,7 +34,11 @@ class Pet:
 
     def history_log(func):
         def wrapper(self, *args, **kwargs):
-            self.history["history"].append(func.__name__)
+            key = self.type.value + "_" + self.name
+            if key in self.history.keys():
+                self.history[key].append(func.__name__)
+            else:
+                self.history[key] = [func.__name__]
             return func(self, *args, **kwargs)
         return wrapper
     
@@ -60,7 +64,8 @@ class Pet:
         return self.energy < self.HALF
 
     def get_history(self) -> None:
-        for i in self.history["history"]:
+        key = self.type.value + "_" + self.name
+        for i in self.history[key]:
             print(i)
     
     def update(self, param, amount, operator):
@@ -135,11 +140,11 @@ what would you like to do with {p.name} the {p.type.value} ?
 
 
 def main(name: str, type: PetType):
-    try:
+    # try:
         p = Pet(name, type)
         operation_interface(p)
-    except TypeError:
-        print("no such animal! the available animals are: bear, deer, horse")
+    # except TypeError:
+        # print("no such animal! the available animals are: bear, deer, horse")
 
 
 if __name__ == "__main__":
