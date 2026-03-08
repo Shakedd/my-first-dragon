@@ -29,7 +29,7 @@ class Pet:
         self.happiness = max(0, min(100, happiness))
         self.energy = max(0, min(100, energy))
         self.history = history
-        self.points = int((abs(self.hunger-100) + self.happiness + self.energy) / 3)
+        self.points = int((self.hunger + self.happiness + self.energy) / 3)
 
     @staticmethod
     def history_log(func):
@@ -43,7 +43,7 @@ class Pet:
         return wrapper
     
     def points_update(self) -> None:
-        self.points = int((abs(self.hunger-100) + self.happiness + self.energy) / 3)
+        self.points = int((self.hunger + self.happiness + self.energy) / 3)
 
     def menu(self) -> None:
         print("""
@@ -55,7 +55,7 @@ class Pet:
               """)
 
     def is_hungry(self) -> bool:
-        return self.hunger > self.HALF
+        return self.hunger < self.HALF
 
     def is_happy(self) -> bool:
         return self.happiness > self.HALF
@@ -83,7 +83,7 @@ class Pet:
 
     @history_log
     def eat(self) -> None:
-        self.hunger = self.update(self.hunger, self.HALF, "-")
+        self.hunger = self.update(self.hunger, self.HALF, "+")
         self.energy = self.update(self.energy, self.FIFTH, "+")
         print("yummy, now I'm not hungry anymore!")
         self.points_update()
@@ -91,7 +91,7 @@ class Pet:
     @history_log
     def sleep(self) -> None:
         self.energy = self.FULL
-        self.hunger = self.update(self.hunger, self.FIFTH, "+")
+        self.hunger = self.update(self.hunger, self.FIFTH, "-")
         self.happiness = self.update(self.happiness, self.FIFTH, "-")
         print("ZZZ...\n I slept well! now I'm not tired anymore!")
         self.points_update()
@@ -100,7 +100,7 @@ class Pet:
     def play(self) -> None:
         self.happiness = self.FULL
         self.energy = self.update(self.energy, self.HALF, "-")
-        self.hunger = self.update(self.hunger, self.HALF, "+")
+        self.hunger = self.update(self.hunger, self.HALF, "-")
         print("🏈🏀\nwow, that was fun, now I'm super happy!")
         self.points_update()
 
