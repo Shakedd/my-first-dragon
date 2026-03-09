@@ -26,14 +26,14 @@ def index(animal, name):
             session["my_pet"].sleep()
         if request.form.get('play') == 'PLAY':
             session["my_pet"].play()
-        # session["hunger"] = p.hunger
-        # session["energy"] = p.energy
-        # session["happiness"] = p.happiness
+        session["hunger"] = session["my_pet"].hunger
+        session["energy"] = session["my_pet"].energy
+        session["happiness"] = session["my_pet"].happiness
     return render_template(
         'buttons.html',
-        hunger = str(session["my_pet"].hunger),
-        energy = str(session["my_pet"].energy),
-        happiness = str(session["my_pet"].happiness),
+        hunger = str(session["hunger"]),
+        energy = str(session["energy"]),
+        happiness = str(session["happiness"]),
         points = str(session["my_pet"].points),
         name=name,
         animal=animal
