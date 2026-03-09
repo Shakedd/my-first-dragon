@@ -36,7 +36,7 @@ class Pet:
     def history_log(func):
         @functools.wraps(func)
         def wrapper(self, *args, **kwargs):
-            key = self.type + "_" + self.name
+            key = self.type.value + "_" + self.name
             if key in self.history.keys():
                 self.history[key].append(func.__name__)
             else:

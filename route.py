@@ -19,14 +19,15 @@ please use the following form url to access your pet:
 
 @app.route('/<string:animal>/<string:name>', methods=['GET', 'POST'])
 def index(animal, name):
+    pet_type = PetType(animal)
     if ("my_pet" not in session.keys()):
-        session["my_pet"] = Pet(name, animal)
+        session["my_pet"] = Pet(name, pet_type)
         session["name"] = name
-        session["type"] = animal
-    elif (session["name"] != name) or (session["type"] != animal):
-        session["my_pet"] = Pet(name, animal)
+        session["type"] = pet_type
+    elif (session["name"] != name) or (session["type"] != pet_type):
+        session["my_pet"] = Pet(name, pet_type)
         session["name"] = name
-        session["type"] = animal
+        session["type"] = pet_type
     if request.method == 'POST':
         if request.form.get('eat') == 'EAT':
             session["my_pet"].eat()
