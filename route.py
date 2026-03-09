@@ -18,18 +18,26 @@ please use the following form url to access your pet:
 
 @app.route('/<string:animal>/<string:name>', methods=['GET', 'POST'])
 def index(animal, name):
-    p = Pet(name, animal)
+    session["my_pet"] = Pet(name, animal)
     if request.method == 'POST':
         if request.form.get('eat') == 'EAT':
-            p.eat()
+            session["my_pet"].eat()
         if request.form.get('sleep') == 'SLEEP':
-            p.sleep()
+            session["my_pet"].sleep()
         if request.form.get('play') == 'PLAY':
-            p.play()
-        session["hunger"] = p.hunger
-        session["energy"] = p.energy
-        session["happiness"] = p.happiness
-    return render_template('buttons.html', hunger = str(p.hunger), energy = str(p.energy), happiness = str(p.happiness), points = str(p.points), name=name, animal=animal)
+            session["my_pet"].play()
+        # session["hunger"] = p.hunger
+        # session["energy"] = p.energy
+        # session["happiness"] = p.happiness
+    return render_template(
+        'buttons.html',
+        hunger = str(session["my_pet"].hunger),
+        energy = str(session["my_pet"].energy),
+        happiness = str(session["my_pet"].happiness),
+        points = str(session["my_pet"].points),
+        name=name,
+        animal=animal
+        )
     
 
 if __name__=='__main__':
