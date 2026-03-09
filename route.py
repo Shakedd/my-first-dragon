@@ -6,6 +6,7 @@ app = Flask("my_dragon")
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+app.config["SECRET_KEY"] = "my_dragon_secret_key"
 Session(app)
 
 @app.route('/')
@@ -18,7 +19,8 @@ please use the following form url to access your pet:
 
 @app.route('/<string:animal>/<string:name>', methods=['GET', 'POST'])
 def index(animal, name):
-    session["my_pet"] = Pet(name, animal)
+    if "my_pet" not in session.keys() :
+        session["my_pet"] = Pet(name, animal)
     if request.method == 'POST':
         if request.form.get('eat') == 'EAT':
             session["my_pet"].eat()
@@ -26,14 +28,15 @@ def index(animal, name):
             session["my_pet"].sleep()
         if request.form.get('play') == 'PLAY':
             session["my_pet"].play()
-        session["hunger"] = session["my_pet"].hunger
-        session["energy"] = session["my_pet"].energy
-        session["happiness"] = session["my_pet"].happiness
+        # session["hunger"] = session["my_pet"].hunger
+        # session["energy"] = session["my_pet"].energy
+        # session["happiness"] = session["my_pet"].happiness
+        # session["points"] = session["my_pet"].points
     return render_template(
         'buttons.html',
-        hunger = str(session["hunger"]),
-        energy = str(session["energy"]),
-        happiness = str(session["happiness"]),
+        hunger = str(session["my_pet"].hunger),
+        energy = str(session["my_pet"].energy),
+        happiness = str(session["my_pet"].happiness),
         points = str(session["my_pet"].points),
         name=name,
         animal=animal
