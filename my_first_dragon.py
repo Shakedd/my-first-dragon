@@ -1,5 +1,6 @@
 from enum import Enum
 import typer
+import functools
 
 class PetType(Enum):
     Bear = "bear"
@@ -33,8 +34,9 @@ class Pet:
 
     @staticmethod
     def history_log(func):
+        @functools.wraps(func)
         def wrapper(self, *args, **kwargs):
-            key = self.type.value + "_" + self.name
+            key = self.type + "_" + self.name
             if key in self.history.keys():
                 self.history[key].append(func.__name__)
             else:

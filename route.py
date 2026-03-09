@@ -21,14 +21,14 @@ def index(animal, name):
     p = Pet(name, animal)
     if request.method == 'POST':
         if request.form.get('eat') == 'EAT':
-            session["eat"] = request.form.get('eat')
             p.eat()
         if request.form.get('sleep') == 'SLEEP':
-            session["sleep"] = request.form.get('sleep')
             p.sleep()
         if request.form.get('play') == 'PLAY':
-            session["play"] = request.form.get('play')
             p.play()
+        session["hunger"] = p.hunger
+        session["energy"] = p.energy
+        session["happiness"] = p.happiness
     return render_template('buttons.html', hunger = str(p.hunger), energy = str(p.energy), happiness = str(p.happiness), points = str(p.points), name=name, animal=animal)
     
 
