@@ -42,7 +42,8 @@ def index(animal, name):
         happiness = str(session["my_pet"].happiness),
         points = str(session["my_pet"].points),
         name=name,
-        animal=animal
+        animal=animal,
+        filename= animal + ".jpg"
         )
     
 

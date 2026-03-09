@@ -15,5 +15,6 @@
             <input type="submit" onclick="alert('{{name}} the {{animal}} slept!')" value="SLEEP" name="sleep"/>
             <input type="submit" onclick="alert('{{name}} the {{animal}} played!')" value="PLAY" name="play"/>
         </form>
+        <img src="{{url_for('static', filename=filename)}}" align="middle" />
     </body>
 </html>
