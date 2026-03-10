@@ -1,6 +1,7 @@
 from enum import Enum
 import typer
 import functools
+from listener import logger
 
 
 class PetType(Enum):
@@ -81,6 +82,7 @@ class Pet:
             param = min(self.FULL, max(self.EMPTY, param - amount))
         return param
 
+    @logger
     @history_log
     def eat(self) -> None:
         self.hunger = self.update(self.hunger, self.HALF, "+")
@@ -88,6 +90,7 @@ class Pet:
         print("yummy, that was delicious!")
         self.points_update()
 
+    @logger
     @history_log
     def sleep(self) -> None:
         self.energy = self.FULL
@@ -96,6 +99,7 @@ class Pet:
         print("ZZZ...\n I slept well! now I'm not tired anymore!")
         self.points_update()
 
+    @logger
     @history_log
     def play(self) -> None:
         self.happiness = self.FULL
