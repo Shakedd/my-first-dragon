@@ -2,6 +2,7 @@ from enum import Enum
 import typer
 import functools
 
+
 class PetType(Enum):
     Bear = "bear"
     Deer = "deer"
@@ -22,7 +23,7 @@ class Pet:
         hunger: int = HALF,
         happiness: int = HALF,
         energy: int = HALF,
-        history: dict = HISTORY_JSON
+        history: dict = HISTORY_JSON,
     ):
         self.name = name
         self.type = type
@@ -42,19 +43,22 @@ class Pet:
             else:
                 self.history[key] = [func.__name__]
             return func(self, *args, **kwargs)
+
         return wrapper
-    
+
     def points_update(self) -> None:
         self.points = int((self.hunger + self.happiness + self.energy) / 3)
 
     def menu(self) -> None:
-        print("""
+        print(
+            """
               options:
-              eat, play, sleep - treat your pet by using these.
-              is hungry, is happy, is energetic - check your pet's status by using these
+              eat, play, sleep - treat your pet
+              is hungry, is happy, is energetic - check your pet's status
               history - watch the treatment history of your pet
               exit - exit the game
-              """)
+              """
+        )
 
     def is_hungry(self) -> bool:
         return self.hunger < self.HALF
@@ -69,7 +73,7 @@ class Pet:
         key = self.type.value + "_" + self.name
         for i in self.history[key]:
             print(i)
-    
+
     def update(self, param: int, amount: int, operator: str) -> int:
         if operator == "+":
             param = max(self.EMPTY, min(self.FULL, param + amount))
@@ -137,10 +141,12 @@ what would you like to do with {p.name} the {p.type.value} ?
 
 def main(name: str, type: PetType):
     # try:
-        p = Pet(name, type)
-        operation_interface(p)
-    # except TypeError:
-        # print("no such animal! the available animals are: bear, deer, horse")
+    p = Pet(name, type)
+    operation_interface(p)
+
+
+# except TypeError:
+# print("no such animal! the available animals are: bear, deer, horse")
 
 
 if __name__ == "__main__":
