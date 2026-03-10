@@ -1,22 +1,23 @@
 import json
-from my_first_dragon import Pet
+# from my_first_dragon import Pet
 import functools
+from time import asctime
 
 LOG_JSON = {}
 
 # listening to the call of eat, play, sleep and log them to a json file
 def logger(func):
     @functools.wraps(func)
-    def wrapper(p: Pet, *args, **kwargs):
+    def wrapper(self, *args, **kwargs):
         data = {
             "action": func.__name__,
-            "hunger": p.hunger,
-            "energy": p.energy,
-            "happiness": p.happiness}
-        LOG_JSON["%(asctime)"].append(data)
+            "hunger": self.hunger,
+            "energy": self.energy,
+            "happiness": self.happiness}
+        LOG_JSON["%(asctime)"] = data
         with open("logger.json", "w") as f:
             json.dump(LOG_JSON, f)
-        return func(p, *args, **kwargs)
+        return func(self, *args, **kwargs)
     return wrapper
         
         
