@@ -1,4 +1,3 @@
-# import logging
 import json
 from my_first_dragon import Pet
 import functools
@@ -9,8 +8,6 @@ LOG_JSON = {}
 def logger(func):
     @functools.wraps(func)
     def wrapper(p: Pet, *args, **kwargs):
-        # data = logging.basicConfig(filename="logger.json", format = '%(asctime)-15s %(levelname)-8s %(message)s',
-        #                            datefmt='%a, %d %b %Y %H:%M:%S')
         data = {
             "action": func.__name__,
             "hunger": p.hunger,
