@@ -17,6 +17,8 @@ def logger(func):
             "energy": p.energy,
             "happiness": p.happiness}
         LOG_JSON["%(asctime)"].append(data)
+        with open("logger.json", "w") as f:
+            json.dump(LOG_JSON, f)
         return func(p, *args, **kwargs)
     return wrapper
         
