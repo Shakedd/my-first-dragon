@@ -1,5 +1,4 @@
 import json
-# from my_first_dragon import Pet
 import functools
 from time import asctime
 
@@ -9,11 +8,13 @@ LOG_JSON = {}
 def logger(func):
     @functools.wraps(func)
     def wrapper(self, *args, **kwargs):
+        tmp = self
+        func(tmp, *args, **kwargs)
         data = {
             "action": func.__name__,
-            "hunger": self.hunger,
-            "energy": self.energy,
-            "happiness": self.happiness}
+            "hunger": tmp.hunger,
+            "energy": tmp.energy,
+            "happiness": tmp.happiness}
         LOG_JSON[asctime()] = data
         with open("logger.json", "w") as f:
             json.dump(LOG_JSON, f)
