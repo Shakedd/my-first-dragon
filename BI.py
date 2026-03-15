@@ -10,6 +10,7 @@ def happiest():
     max_happiness = 0
     for key in data.keys():
         if data[key]["happiness"] > max_happiness:
+            max_happiness = data[key]["happiness"]
             date = key
     return date
 
@@ -27,3 +28,11 @@ def most():
     for act in actions.keys():
         if actions[act] == maximum:
             return act
+
+def lower_than_50():
+    data = get_data()
+    counter = 0
+    for key in data.keys():
+        if data[key]["points"] < 50:
+            counter += 1
+    return counter
