@@ -14,7 +14,7 @@ def logger(func):
             "hunger": self.hunger,
             "energy": self.energy,
             "happiness": self.happiness}
-        LOG_JSON["%(asctime)"] = data
+        LOG_JSON[asctime()] = data
         with open("logger.json", "w") as f:
             json.dump(LOG_JSON, f)
         return func(self, *args, **kwargs)
