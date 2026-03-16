@@ -1,9 +1,10 @@
-from json import loads
+from json import load
+import time
 
 def get_data():
-    with open("logger.json", "a") as f:
-        data = f.read()
-    return loads(data)
+    with open("logger.json", "r") as f:
+        data = load(f)
+    return data
 
 def happiest():
     data = get_data()
@@ -48,7 +49,7 @@ def avg_happiness():
 
 def avg_time():
     data = get_data()
-    prev_time = ""
+    prev_time = time()
     sum = 0
     count = 0
     for key in data.keys():
@@ -62,4 +63,7 @@ def avg_time():
     return sum/count
 
 def main():
+    print(avg_time())
     
+if __name__ == "__main__":
+    main()
