@@ -37,7 +37,7 @@ def lower_than_50():
             counter += 1
     return counter
 
-def happiness_avg():
+def avg_happiness():
     data = get_data()
     count = 0
     sum = 0
@@ -45,3 +45,21 @@ def happiness_avg():
         count += 1
         sum += data[key]["happiness"]
     return sum/count
+
+def avg_time():
+    data = get_data()
+    prev_time = ""
+    sum = 0
+    count = 0
+    for key in data.keys():
+        if count == 0:
+            prev_time = key
+            count += 1
+        else:
+            sum += (key - prev_time)
+            count += 1
+            prev_time = key
+    return sum/count
+
+def main():
+    
