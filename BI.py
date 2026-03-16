@@ -47,23 +47,23 @@ def avg_happiness():
         sum += data[key]["happiness"]
     return sum/count
 
-def avg_time():
-    data = get_data()
-    prev_time = time()
-    sum = 0
-    count = 0
-    for key in data.keys():
-        if count == 0:
-            prev_time = key
-            count += 1
-        else:
-            sum += (key - prev_time)
-            count += 1
-            prev_time = key
-    return sum/count
+# def avg_time():
+#     data = get_data()
+#     prev_time = time.time()
+#     sum = 0
+#     count = 0
+#     for key in data.keys():
+#         if count == 0:
+#             prev_time = key
+#             count += 1
+#         else:
+#             sum += (key - prev_time)
+#             count += 1
+#             prev_time = key
+#     return sum/count
 
 def main():
-    print(avg_time())
+    print(happiest())
     
 if __name__ == "__main__":
     main()
