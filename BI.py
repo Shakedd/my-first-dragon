@@ -36,3 +36,12 @@ def lower_than_50():
         if data[key]["points"] < 50:
             counter += 1
     return counter
+
+def happiness_avg():
+    data = get_data()
+    count = 0
+    sum = 0
+    for key in data.keys():
+        count += 1
+        sum += data[key]["happiness"]
+    return sum/count
