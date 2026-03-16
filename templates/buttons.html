@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pet Game</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}"/>
+    </head>
+    <body>
+        <h1>Hello! you can treat {{ name }} the {{ animal }} using the buttons below. {{ name }}'s status is:</h1>
+        <h3>hunger: {{ hunger }}</h3>
+        <h3>energy: {{ energy }}</h3>
+        <h3>happiness: {{ happiness }}</h3>
+        <h3>points: {{ points }}</h3>
+        <form method="post" action="/{{animal}}/{{name}}">
+            <input type="submit" onclick="alert('{{name}} the {{animal}} ate!')" value="EAT" name="eat"/>
+            <input type="submit" onclick="alert('{{name}} the {{animal}} slept!')" value="SLEEP" name="sleep"/>
+            <input type="submit" onclick="alert('{{name}} the {{animal}} played!')" value="PLAY" name="play"/>
+        </form>
+        <img src="{{url_for('static', filename=filename)}}" align="middle" />
+    </body>
+</html>
